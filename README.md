@@ -117,37 +117,25 @@ GitHub의 원격 브랜치도 필요 없다면 PR 병합 완료 화면의 **Dele
 
 ## 전체 작업 흐름 요약
 
-```text
-현재 브랜치 확인
-    ↓
-main 브랜치로 이동
-    ↓
-원격 main 최신 소스 Pull
-    ↓
-개인 브랜치 생성 및 이동 (feature/login)
-    ↓
-소스코드 수정 · 추가 · 삭제 및 테스트
-    ↓
-SourceTree에서 Stage → Commit → Push
-    ↓
-GitHub에서 Pull Request 생성
-(base: main ← compare: feature/login)
-    ↓
-변경 내역 검토 후 Merge
-    ↓
-로컬 main으로 이동 및 Pull
-    ↓
-사용하지 않는 작업 브랜치 삭제 (선택)
-```
+| 순서 | 작업 | 위치 / 도구 | 결과 |
+|---:|---|---|---|
+| 1 | 현재 브랜치와 변경 사항 확인 | 터미널 | 작업 상태 확인 |
+| 2 | `main`으로 이동하고 최신 내용 가져오기 | 터미널 | 로컬 `main` 동기화 |
+| 3 | 개인 작업 브랜치 생성 및 이동 (`feature/login`) | 터미널 | 독립된 작업 공간 준비 |
+| 4 | 코드 수정·추가·삭제 및 테스트 | 편집기 | 작업 브랜치에 변경 사항 생성 |
+| 5 | 변경 파일 Stage → Commit → Push | SourceTree | 변경 사항을 GitHub에 업로드 |
+| 6 | PR 생성 (`base: main` ← `compare: feature/login`) | GitHub | `main`에 반영할 변경 사항 제안 |
+| 7 | 변경 내역 검토 후 Merge | GitHub | PR 변경 사항을 원격 `main`에 병합 |
+| 8 | 로컬 `main` 동기화 및 작업 브랜치 정리(선택) | 터미널 / GitHub | 병합 결과 반영 및 사용한 브랜치 정리 |
 
 ## 주요 Git 명령어 모음
 
-| 작업 | 명령어 |
-|---|---|
-| 현재 브랜치 확인 | `git branch` |
-| 변경 사항 확인 | `git status` |
-| main으로 이동 | `git switch main` |
-| main 최신 소스 가져오기 | `git pull origin main` |
-| 작업 브랜치 생성 및 이동 | `git switch -c feature/login` |
-| 작업 브랜치로 이동 | `git switch feature/login` |
-| 병합된 로컬 브랜치 삭제 | `git branch -d feature/login` |
+| 목적 | 명령어 | 설명 |
+|---|---|---|
+| 현재 브랜치 확인 | `git branch` | `*` 표시가 현재 브랜치입니다. |
+| 작업 트리 상태 확인 | `git status` | 커밋되지 않은 변경 사항을 확인합니다. |
+| `main`으로 이동 | `git switch main` | 로컬 `main` 브랜치로 전환합니다. |
+| 원격 `main` 최신 내용 가져오기 | `git pull origin main` | 원격 `main`의 변경 사항을 가져와 현재 `main`에 반영합니다. |
+| 작업 브랜치 생성 및 이동 | `git switch -c feature/login` | `feature/login`을 만들고 해당 브랜치로 전환합니다. |
+| 기존 작업 브랜치로 이동 | `git switch feature/login` | 이미 존재하는 작업 브랜치로 전환합니다. |
+| 병합된 로컬 브랜치 삭제 | `git branch -d feature/login` | 병합이 끝난 로컬 작업 브랜치를 삭제합니다. |
